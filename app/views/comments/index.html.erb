@@ -3,11 +3,10 @@
 
   <div class="comments">
     <h4>＜コメント一覧＞</h4>
+    <%# if user_signed_in? %>
       <% @comments.each do |comment| %>
-        <%#= form_with model: @comment, local: true do |f| %>
         <%= form_with url:comment_path(comment.id), method: :patch, local: true do |f| %>
           <p><%= f.text_field :text, value:comment.text, class:"" %></p>
-          <%#= link_to "返信"  %>
           <%= f.submit "編集する", class:"#" %>
         <% end %>
           <%= button_to "削除", comment_path(comment.id), method: :delete %>
@@ -20,6 +19,11 @@
         <%= form.submit "SEND" %>
       <% end %>
     <%# else %>
-      <%# <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong> %>
+      <% @comments.each do |comment| %>
+        <div>
+          <%= comment.text %>
+          <%= link_to "返信"  %>
+        </div>
+      <% end %>
     <%# end %>
   </div>

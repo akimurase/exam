@@ -20,7 +20,8 @@ development:
   database: exam_development
   username: root
   password:
-  host: db
+  # host: db
+  socket: /tmp/mysql.sock
 
 
 # Warning: The database defined as "test" will be erased and

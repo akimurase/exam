@@ -4,7 +4,7 @@
 
   <div class="comments">
     <h4>＜コメント一覧＞</h4>
-    <%# if user_signed_in? %>
+    <% if user_signed_in? || admin_signed_in? %>
       <% @comments.each do |comment| %>
         <%= form_with url:comment_path(comment.id), method: :patch, local: true do |f| %>
           <p><%= f.text_field :text, value:comment.text, class:"" %></p>
@@ -14,19 +14,18 @@
       <% end %>
   </div>
   <div class="container">
-    <%# if current_user %>
       <%= form_with(model: @comment, local: true) do |form| %>
         <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
         <%= form.submit "SEND" %>
       <% end %>
-    <%# else %>
+    <% else %>
       <% @comments.each do |comment| %>
         <div>
           <%= comment.text %>
           <%= link_to "返信"  %>
         </div>
       <% end %>
-    <%# end %>
+    <% end %>
   </div>
 
 

@@ -1,5 +1,6 @@
-<h1>Comments#index</h1>
-<p>Find me in app/views/comments/index.html.erb</p>
+<%= link_to 'サインイン', new_admin_registration_path, method: :get %>
+<%= link_to 'ログイン', new_admin_session_path, method: :get %>
+<%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
 
   <div class="comments">
     <h4>＜コメント一覧＞</h4>

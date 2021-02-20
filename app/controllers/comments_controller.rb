@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
 
   def create
     Comment.create(comment_params)
-    binding.pry
     redirect_to action: :index
   end
 

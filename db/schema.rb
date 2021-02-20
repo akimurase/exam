@@ -24,4 +24,12 @@ ActiveRecord::Schema.define(version: 2021_02_20_044216) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "comments", charset: "utf8", force: :cascade do |t|
+    t.text "text"
+    t.bigint "user_id_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id_id"], name: "index_comments_on_user_id_id"
+  end
+
 end

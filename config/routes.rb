@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root to: 'comments#index'
+  resources :comments
   devise_for :admins
   get 'tests/index'
   # devise_for :admins, controllers: {
@@ -6,5 +9,4 @@ Rails.application.routes.draw do
   #   passwords:     'admins/passwords',
   #   registrations: 'admins/registrations'
   # }
-  # root to: 'dmins#sessions'
 end

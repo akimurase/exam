@@ -1,2 +1,12 @@
 <h1>Replys#new</h1>
-<p>Find me in app/views/replys/new.html.erb</p>
+
+  <% @comments.each do |comment| %>
+    <div>
+      <p><span><%#= comment.user.email %></span>:<%#= comment.text %></p>
+      <p><%= comment.text %></p>
+    </div>
+  <% end %>
+  <%= form_with(model: @reply, local: true) do |form| %>
+    <%= form.text_area :text, placeholder: "", rows: "2" %>
+  <%= form.submit "SEND" %>
+  <% end %>

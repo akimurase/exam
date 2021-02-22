@@ -26,24 +26,24 @@ ActiveRecord::Schema.define(version: 2021_02_20_233634) do
 
   create_table "comments", charset: "utf8", force: :cascade do |t|
     t.text "text"
-    t.bigint "user_id_id"
-    t.bigint "admin_id_id"
+    t.bigint "user_id"
+    t.bigint "admin_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id_id"], name: "index_comments_on_admin_id_id"
-    t.index ["user_id_id"], name: "index_comments_on_user_id_id"
+    t.index ["admin_id"], name: "index_comments_on_admin_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "replies", charset: "utf8", force: :cascade do |t|
     t.text "text"
-    t.bigint "comment_id_id"
-    t.bigint "user_id_id"
-    t.bigint "admin_id_id"
+    t.bigint "comment_id"
+    t.bigint "user_id"
+    t.bigint "admin_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id_id"], name: "index_replies_on_admin_id_id"
-    t.index ["comment_id_id"], name: "index_replies_on_comment_id_id"
-    t.index ["user_id_id"], name: "index_replies_on_user_id_id"
+    t.index ["admin_id"], name: "index_replies_on_admin_id"
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|

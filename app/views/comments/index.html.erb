@@ -21,12 +21,10 @@
           </div>
           <%= button_to "削除", comment_path(comment.id), method: :delete %>
         <% elsif user_signed_in? && (current_user.id != @comment.user_id) %>
-          <%# @comments.each do |comment| %>
             <div>
               <p><span><%= comment.user.email %></span>:<%= comment.text %></p>
               <%= link_to "返信", new_comment_reply_path(comment.id) %>
             </div>
-          <%# end %>
         <% else %>
           <p><span><%= comment.user.email %></span>:<%= comment.text %></p>
         <% end %>
@@ -36,11 +34,14 @@
 <hr>
 
   <div>
-    <%= form_with(model: @comment, local: true) do |form| %>
-      <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
-      <%= form.submit "SEND" %>
+    <% if user_signed_in? %>
+      <%= form_with(model: @comment, local: true) do |form| %>
+        <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
+        <%= form.submit "SEND" %>
+      <% end %>
     <% end %>
   </div>
+
 <%= link_to '管理者新規登録', new_admin_registration_path, method: :get %>
 <%= link_to 'ログイン', new_admin_session_path, method: :get %>
 <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>

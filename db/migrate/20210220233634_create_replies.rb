@@ -4,7 +4,7 @@ class CreateReplies < ActiveRecord::Migration[6.1]
       t.text :text
       t.references :comment
       t.references :user
-      t.references :admin
+      # t.references :admin
 
       t.timestamps
     end

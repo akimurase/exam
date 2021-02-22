@@ -2,11 +2,6 @@ class CommentsController < ApplicationController
   def index
     @comment = Comment.new
     @comments = Comment.all
-    # binding.pry
-    # @comment = Comment.find(params[:user_id])
-    # @comment_delete = Comment.find(params[:id])
-    # @comment_edit = Comment.find(comment_params_edit)
-
   end
 
   def create

@@ -2,8 +2,6 @@ class CommentsController < ApplicationController
   def index
     @comment = Comment.new
     @comments = Comment.all
-    # @comment_delete = Comment.find(params[:id])
-    # @comment_edit = Comment.find(comment_params_edit)
   end
 
   def create
@@ -12,6 +10,8 @@ class CommentsController < ApplicationController
   end
 
   def show
+    @comment = Comment.find(params[:id])
+    @replies = Reply.where(comment_id:params[:id])
   end
 
   def edit
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   def update
     comment = Comment.find(params[:id])
     comment.update(comment_params_edit)
-    redirect_to root_path
+    redirect_to action: :index
   end
 
   def destroy

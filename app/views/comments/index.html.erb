@@ -15,7 +15,8 @@
         <% if admin_signed_in? || (user_signed_in? && (current_user.id == comment.user_id)) %>
           <div>
             <%= form_with url:comment_path(comment.id), method: :patch, local: true do |f| %>
-              <p><span><%= comment.user.email %></span><%= f.text_field :text, value:comment.text, class:"" %></p>
+              <span><%= comment.user.email %></span>
+                <p><%= f.text_field :text, value:comment.text, class:"" %></p>
               <%= f.submit "編集する", class:"#" %>
             <% end %>
           </div>
@@ -26,7 +27,13 @@
               <%= link_to "返信", new_comment_reply_path(comment.id) %>
             </div>
         <% else %>
-          <p><span><%= comment.user.email %></span>:<%= comment.text %></p>
+          <div>
+            <p><span><%= comment.user.email %></span>:
+              <%= link_to comment_path(comment.id), method: :get do %>
+                <%= comment.text %>
+              <% end %>
+            </p>
+          </div>
         <% end %>
       <% end %>
   </div> 

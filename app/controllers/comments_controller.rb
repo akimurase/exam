@@ -10,6 +10,8 @@ class CommentsController < ApplicationController
   end
 
   def show
+    @comment = Comment.find(params[:id])
+    @replies = Reply.where(comment_id:params[:id])
   end
 
   def edit

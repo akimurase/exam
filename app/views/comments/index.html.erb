@@ -1,5 +1,4 @@
 <%= render "shared/header" %>
-
 <div class="contents row">
   <div class="container">
     <div class="comments">
@@ -9,7 +8,7 @@
           <% if admin_signed_in? || (user_signed_in? && (current_user.id == comment.user_id)) %>
             <div class="comment-box">
               <%= form_with url:comment_path(comment.id), method: :patch, local: true do |f| %>
-              <span class="comment-name"><%= comment.user.email %></span>
+              <span class="comment-name"><%= comment.user.name %></span>
                 <%= f.text_field :text, value:comment.text, class:"form input" %>
                 <div class="btn-box">
                   <li><%= f.submit "編集する", class:"edit-btn" %></li>
@@ -37,7 +36,7 @@
     <div class="send-box">
       <% if user_signed_in? %>
         <%= form_with(model: @comment, local: true) do |form| %>
-          <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
+          <%= form.text_area :text %>
           <%= form.submit "SEND", class:"send" %>
         <% end %>
       <% end %>
@@ -48,13 +47,14 @@
   <% if user_signed_in? %>
   <% else %>
     <ul>
-      <% if admin = nil? %>
-        <li><%= link_to '管理者登録', new_admin_registration_path, method: :get %></li>
-      <% end %>
-      <% if admin_signed_in? %>
-        <li><%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete %></li>
+      <% if @admin.present? %>
+        <% if admin_signed_in? %>
+          <li><%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to '管理者はこちら', new_admin_session_path, method: :get %></li>
+        <% end %>
       <% else %>
-        <li><%= link_to '管理者はこちら', new_admin_session_path, method: :get %></li>
+        <li><%= link_to '管理者登録', new_admin_registration_path, method: :get %></li>
       <% end %>
     </ul>
   <% end %>

@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
   def index
     @comment = Comment.new
     @comments = Comment.all
+    @admin = Admin.all
+    # binding.pry
   end
 
   def create

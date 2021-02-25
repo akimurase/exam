@@ -5,7 +5,7 @@
         <% else %>
           <% if user_signed_in? %>
             <div class="user_nav grid-6">
-              <span><%= current_user.email %>
+              <span><%= current_user.name %>
                 <ul class="user__info">
                   <li>
                     <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>

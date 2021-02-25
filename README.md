@@ -1,24 +1,3 @@
-# README
+テーブル定義書
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![テーブル定義書 - シート1_pages-to-jpg-0001](https://user-images.githubusercontent.com/69699126/109115813-eec0d200-7782-11eb-80d6-48029b36de37.jpg)

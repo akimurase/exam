@@ -1,54 +1,61 @@
-<%= link_to '新規登録', new_user_registration_path, method: :get %>
-<%= link_to 'ログイン', new_user_session_path, method: :get %>
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+<%= render "shared/header" %>
 
-<div>
-  <% if user_signed_in?  %>
-    <p><%= current_user.email %>がログインしてます</p>
-  <% end %>
-</div>
-
-
-  <div class="comments">
-    <h4>＜コメント一覧＞</h4>
-      <% @comments.each do |comment| %>
-        <% if admin_signed_in? || (user_signed_in? && (current_user.id == comment.user_id)) %>
-          <div>
-            <%= form_with url:comment_path(comment.id), method: :patch, local: true do |f| %>
-              <span><%= comment.user.email %></span>
-                <p><%= f.text_field :text, value:comment.text, class:"" %></p>
-              <%= f.submit "編集する", class:"#" %>
-            <% end %>
-          </div>
-          <%= button_to "削除", comment_path(comment.id), method: :delete %>
-        <% elsif user_signed_in? && (current_user.id != @comment.user_id) %>
-            <div>
-              <p><span><%= comment.user.email %></span>:<%= comment.text %></p>
-              <%= link_to "返信", new_comment_reply_path(comment.id) %>
+<div class="contents row">
+  <div class="container">
+    <div class="comments">
+      <h4>＜スレッド一覧＞</h4>
+      <%# <div class="form-comment"> %>
+        <% @comments.each do |comment| %>
+          <% if admin_signed_in? || (user_signed_in? && (current_user.id == comment.user_id)) %>
+            <div class="comment-box">
+              <%= form_with url:comment_path(comment.id), method: :patch, local: true do |f| %>
+              <span class="comment-name"><%= comment.user.email %></span>
+                <%= f.text_field :text, value:comment.text, class:"form input" %>
+                <div class="btn-box">
+                  <li><%= f.submit "編集する", class:"edit-btn" %></li>
+                    <% end %>
+                  <li><%= button_to "削除", comment_path(comment.id), method: :delete, class:"delete-btn" %></li>
+                </div>
             </div>
-        <% else %>
-          <div>
-            <p><span><%= comment.user.email %></span>:
-              <%= link_to comment_path(comment.id), method: :get do %>
-                <%= comment.text %>
-              <% end %>
-            </p>
-          </div>
+          <% elsif user_signed_in? && (current_user.id != @comment.user_id) %>
+              <div>
+                <p><span><%= comment.user.email %></span>:<%= comment.text %></p>
+                <%= link_to "返信", new_comment_reply_path(comment.id) %>
+              </div>
+          <% else %>
+            <div>
+              <p><span><%= comment.user.email %></span>:
+                <%= link_to comment_path(comment.id), method: :get do %>
+                  <%= comment.text %>
+                <% end %>
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+    </div> 
+      <hr>
+    <div class="send-box">
+      <% if user_signed_in? %>
+        <%= form_with(model: @comment, local: true) do |form| %>
+          <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
+          <%= form.submit "SEND", class:"send" %>
         <% end %>
       <% end %>
-  </div> 
-
-<hr>
-
+    </div>
   <div>
-    <% if user_signed_in? %>
-      <%= form_with(model: @comment, local: true) do |form| %>
-        <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
-        <%= form.submit "SEND" %>
+<div>
+<div class="">
+  <% if user_signed_in? %>
+  <% else %>
+    <ul>
+      <% if admin = nil? %>
+        <li><%= link_to '管理者登録', new_admin_registration_path, method: :get %></li>
       <% end %>
-    <% end %>
-  </div>
-
-<%= link_to '管理者新規登録', new_admin_registration_path, method: :get %>
-<%= link_to 'ログイン', new_admin_session_path, method: :get %>
-<%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+      <% if admin_signed_in? %>
+        <li><%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to '管理者はこちら', new_admin_session_path, method: :get %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

@@ -1,12 +1,12 @@
+<%= render "shared/header" %>
 
-  <p><span><%= @comment.user.email %></span>:<%= @comment.text %></p>
-
+<div class="contents row">
+  <div class="container">
+    <p><span><%= @comment.user.email %></span>:<%= @comment.text %></p>
   <div>
-    <% @replies.each do |reply| %>
-      <P><span><%#= reply.user_id %></span><%= reply.text %></p>
-    <% end %>
+      <% @replies.each do |reply| %>
+        <P><span><%#= reply.user_id %></span><%= reply.text %></p>
+      <% end %>
+    </div>
   </div>
-
-<div>
-  <%= link_to "戻る", root_path %>
 </div>

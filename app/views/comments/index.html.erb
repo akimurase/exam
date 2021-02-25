@@ -1,5 +1,4 @@
 <%= render "shared/header" %>
-
 <div class="contents row">
   <div class="container">
     <div class="comments">
@@ -48,14 +47,14 @@
   <% if user_signed_in? %>
   <% else %>
     <ul>
-      <% unless @admin != nil %>
-        <li><%= link_to '管理者登録', new_admin_registration_path, method: :get %></li>
-      <% else %>
+      <% if @admin.present? %>
         <% if admin_signed_in? %>
           <li><%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete %></li>
         <% else %>
           <li><%= link_to '管理者はこちら', new_admin_session_path, method: :get %></li>
         <% end %>
+      <% else %>
+        <li><%= link_to '管理者登録', new_admin_registration_path, method: :get %></li>
       <% end %>
     </ul>
   <% end %>
